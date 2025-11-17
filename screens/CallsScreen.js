@@ -19,14 +19,14 @@ const calls = [
     name: 'Mohin',
     time: 'Today, 10:20 AM',
     type: 'incoming',
-    image: require('../assets/user1.png'),
+    image: require('../assets/images.jpg'),
   },
   {
     id: '2',
     name: 'Akshay',
     time: 'Yesterday, 8:45 PM',
     type: 'missed',
-    image: require('../assets/user2.png'),
+    image: require('../assets/imagess.jpg'),
   },
   {
     id: '3',

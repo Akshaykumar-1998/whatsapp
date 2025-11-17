@@ -1,10 +1,29 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+  Alert,
+} from 'react-native';
 
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get('window');
 
 export default function RegisterScreen({ navigation }) {
-  const [number, setNumber] = useState("");
+  const [number, setNumber] = useState('');
+
+  const handleNext = () => {
+    if (number.length !== 10) {
+      Alert.alert(
+        'Invalid Number',
+        'Please enter a valid 10-digit phone number',
+      );
+      return;
+    }
+    navigation.replace('MainTabs');
+  };
 
   return (
     <View style={styles.container}>
@@ -15,18 +34,13 @@ export default function RegisterScreen({ navigation }) {
           style={styles.input}
           placeholder="Phone Number"
           keyboardType="number-pad"
-          placeholderTextColor={"#777"}
+          placeholderTextColor={'#777'}
           value={number}
           onChangeText={setNumber}
           maxLength={10}
         />
 
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => {
-            if (number.length >= 10) navigation.replace("MainTabs");
-          }}
-        >
+        <TouchableOpacity style={styles.btn} onPress={handleNext}>
           <Text style={styles.btnText}>Next</Text>
         </TouchableOpacity>
       </View>
@@ -37,46 +51,46 @@ export default function RegisterScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     paddingHorizontal: width * 0.07,
-    justifyContent: "flex-start",
-    paddingTop: height * 0.15, 
+    justifyContent: 'flex-start',
+    paddingTop: height * 0.15,
   },
 
   title: {
     fontSize: width * 0.065,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: height * 0.02,
-    textAlign: "center",
+    textAlign: 'center',
   },
 
   formContainer: {
-    width: "100%",
-    alignItems: "center",
+    width: '100%',
+    alignItems: 'center',
   },
 
   input: {
-    width: "90%",
+    width: '90%',
     borderWidth: 1,
     borderRadius: width * 0.02,
     paddingVertical: height * 0.017,
     paddingHorizontal: width * 0.05,
     fontSize: width * 0.045,
-    borderColor: "#ccc",
+    borderColor: '#ccc',
     marginBottom: height * 0.035,
   },
 
   btn: {
-    width: "90%",
-    backgroundColor: "#25D366",
+    width: '90%',
+    backgroundColor: '#25D366',
     paddingVertical: height * 0.02,
     borderRadius: width * 0.02,
-    alignItems: "center",
+    alignItems: 'center',
   },
 
   btnText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: width * 0.045,
-    fontWeight: "700",
+    fontWeight: '700',
   },
 });

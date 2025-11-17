@@ -16,14 +16,14 @@ const statuses = [
     id: "1",
     name: "Mohin",
     time: "Just now",
-    image: require("../assets/user1.png"),
+    image: require("../assets/images.jpg"),
     viewed: false,
   },
   {
     id: "2",
     name: "Akshay",
     time: "Today, 8:30 AM",
-    image: require("../assets/user2.png"),
+    image: require("../assets/imagess.jpg"),
     viewed: true,
   },
   {
@@ -61,7 +61,7 @@ export default function StatusScreen() {
       <View style={styles.myStatusContainer}>
         <View style={styles.myStatusImageWrapper}>
           <Image
-            source={require("../assets/user1.png")}
+            source={require("../assets/images.jpg")}
             style={styles.profileImage}
           />
           <View style={styles.addIcon}>

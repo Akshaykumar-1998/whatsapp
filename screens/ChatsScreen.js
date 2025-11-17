@@ -18,7 +18,7 @@ const chats = [
     message: "Hey, what's up?",
     time: "10:30 AM",
     unread: 2,
-    image: require("../assets/user1.png"),
+    image: require("../assets/images.jpg"),
   },
   {
     id: "2",
@@ -26,7 +26,7 @@ const chats = [
     message: "Send the files.",
     time: "09:12 AM",
     unread: 0,
-    image: require("../assets/user2.png"),
+    image: require("../assets/imagess.jpg"),
   },
   {
     id: "3",
@@ -42,7 +42,7 @@ const chats = [
     message: "Okay bro 👍",
     time: "Yesterday",
     unread: 0,
-    image: require("../assets/user1.png"),
+    image: require("../assets/images.jpg"),
   },
 
   {
