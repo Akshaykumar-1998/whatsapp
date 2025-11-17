@@ -57,7 +57,7 @@ export default function CallsScreen() {
       <Ionicons
         name="call-outline"
         size={26}
-        color="#25D366"
+        color="#075E54"
         style={{ marginLeft: 10 }}
       />
     </TouchableOpacity>

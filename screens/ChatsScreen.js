@@ -19,6 +19,7 @@ const chats = [
     time: "10:30 AM",
     unread: 2,
     image: require("../assets/images.jpg"),
+    status: "Online",
   },
   {
     id: "2",
@@ -27,6 +28,7 @@ const chats = [
     time: "09:12 AM",
     unread: 0,
     image: require("../assets/imagess.jpg"),
+    status: "Offline",
   },
   {
     id: "3",
@@ -35,6 +37,7 @@ const chats = [
     time: "Yesterday",
     unread: 1,
     image: require("../assets/user3.jpg"),
+    status: "Online",
   },
   {
     id: "4",
@@ -43,8 +46,8 @@ const chats = [
     time: "Yesterday",
     unread: 0,
     image: require("../assets/images.jpg"),
+    status: "Offline",
   },
-
   {
     id: "5",
     name: "Neha",
@@ -52,6 +55,7 @@ const chats = [
     time: "08:45 AM",
     unread: 3,
     image: require("../assets/user4.jpg"),
+    status: "Online",
   },
 ];
 
@@ -59,10 +63,16 @@ export default function ChatsScreen({ navigation }) {
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={styles.chatContainer}
-      onPress={() => navigation.navigate("SpecificChat", { chat: item })}
+      onPress={() =>
+        navigation.navigate("SpecificChat", {
+          chat: item,
+          name: item.name,
+          avatar: item.image,
+          status: item.status,
+        })
+      }
     >
       <Image source={item.image} style={styles.profileImage} />
-
       <View style={styles.textContainer}>
         <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.message} numberOfLines={1}>
@@ -72,7 +82,6 @@ export default function ChatsScreen({ navigation }) {
 
       <View style={styles.rightContainer}>
         <Text style={styles.time}>{item.time}</Text>
-
         {item.unread > 0 && (
           <View style={styles.unreadBadge}>
             <Text style={styles.unreadText}>{item.unread}</Text>
@@ -130,12 +139,12 @@ const styles = StyleSheet.create({
 
   time: {
     fontSize: width * 0.032,
-    color: "#25D366",
+    color: "#075E54",
     marginBottom: 4,
   },
 
   unreadBadge: {
-    backgroundColor: "#25D366",
+    backgroundColor: "#075E54",
     paddingVertical: 3,
     paddingHorizontal: 6,
     borderRadius: 20,

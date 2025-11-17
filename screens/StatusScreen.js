@@ -41,7 +41,7 @@ export default function StatusScreen() {
       <View
         style={[
           styles.statusBorder,
-          { borderColor: item.viewed ? "#999" : "#25D366" },
+          { borderColor: item.viewed ? "#999" : "#075E54" },
         ]}
       >
         <Image source={item.image} style={styles.profileImage} />
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     right: 0,
-    backgroundColor: "#25D366",
+    backgroundColor: "#075E54",
     width: 22,
     height: 22,
     borderRadius: 11,

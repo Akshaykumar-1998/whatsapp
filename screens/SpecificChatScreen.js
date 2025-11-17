@@ -1,10 +1,22 @@
-import React from "react";
-import { View, Text, StyleSheet, FlatList, Dimensions } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
+import Icon from 'react-native-vector-icons/Ionicons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
-const { width } = Dimensions.get("window");
-
-export default function SpecificChatScreen({ route }) {
+export default function SpecificChatScreen({ route, navigation }) {
   const { chat } = route.params;
+
+  const [messageText, setMessageText] = useState('');
 
   const messages = [
     { id: "1", text: "Hey, how are you?", sender: "other" },
@@ -26,12 +38,42 @@ export default function SpecificChatScreen({ route }) {
   );
 
   return (
-    <View style={styles.container}>
-
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={90}
+    >
+   
       <View style={styles.header}>
-        <Text style={styles.headerName}>{chat.name}</Text>
+        <View style={styles.headerLeft}>
+          <TouchableOpacity onPress={() => navigation.navigate('MainTabs')} style={styles.backButton}>
+            <Icon name="arrow-back" size={24} color="#fff" />
+          </TouchableOpacity>
+
+          <Image
+            source={{ uri: chat.avatar }}
+            style={styles.avatar}
+          />
+          <View>
+            <Text style={styles.headerName}>{chat.name}</Text>
+            <Text style={styles.headerStatus}>{chat.status || "Online"}</Text>
+          </View>
+        </View>
+
+        <View style={styles.headerRight}>
+          <TouchableOpacity style={styles.iconButton}>
+            <Icon name="call-outline" size={22} color="#fff" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.iconButton}>
+            <MaterialIcon name="videocam" size={22} color="#fff" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.iconButton}>
+            <Icon name="ellipsis-vertical" size={22} color="#fff" />
+          </TouchableOpacity>
+        </View>
       </View>
 
+ 
       <FlatList
         data={messages}
         keyExtractor={(item) => item.id}
@@ -39,7 +81,24 @@ export default function SpecificChatScreen({ route }) {
         contentContainerStyle={{ padding: 10 }}
         showsVerticalScrollIndicator={false}
       />
-    </View>
+
+   
+      <View style={styles.inputContainer}>
+        <TouchableOpacity style={{ marginHorizontal: 5 }}>
+          <Icon name="happy-outline" size={28} color="#555" />
+        </TouchableOpacity>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Type a message"
+          value={messageText}
+          onChangeText={setMessageText}
+          placeholderTextColor={'black'}
+        />
+        <TouchableOpacity style={{ marginHorizontal: 5 }}>
+          <Icon name="send" size={28} color="#075E54" />
+        </TouchableOpacity>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -48,14 +107,47 @@ const styles = StyleSheet.create({
 
   header: {
     width: "100%",
-    padding: 15,
-    backgroundColor: "#25D366",
+    padding: 10,
+    backgroundColor: "#075E54",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  headerLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  backButton: {
+    marginRight: 10,
+  },
+
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 10,
   },
 
   headerName: {
     color: "#fff",
-    fontSize: 20,
-    fontWeight: "700",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+
+  headerStatus: {
+    color: "#fff",
+    fontSize: 12,
+  },
+
+  headerRight: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  iconButton: {
+    marginHorizontal: 5,
   },
 
   messageBubble: {
@@ -76,4 +168,23 @@ const styles = StyleSheet.create({
   },
 
   messageText: { fontSize: 16 },
+
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderTopWidth: 0.5,
+    borderColor: "#ccc",
+    backgroundColor: "#fff",
+  },
+
+  textInput: {
+    flex: 1,
+    backgroundColor: "#f2f2f2",
+    borderRadius: 20,
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    fontSize: 16,
+  },
 });
