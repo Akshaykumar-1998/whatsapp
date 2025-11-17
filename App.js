@@ -19,7 +19,16 @@ const App = () => {
           <Stack.Screen name="Flash" component={FlashScreen} />
           <Stack.Screen name="Agree" component={AgreeScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
-          <Stack.Screen name="SpecificChat" component={SpecificChatScreen} />
+          <Stack.Screen name="SpecificChat" component={SpecificChatScreen}
+           options={{
+    headerShown: true,        
+    headerBackTitleVisible: false, 
+    title: "Chat",             
+    headerStyle: {
+      backgroundColor: "#fff",  
+    },
+    headerTintColor: "#000",   
+  }} />
           <Stack.Screen name="MainTabs" component={AppNavigator} />
         </Stack.Navigator>
       </NavigationContainer>
